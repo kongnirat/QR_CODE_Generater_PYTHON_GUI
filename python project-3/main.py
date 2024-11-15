@@ -8,20 +8,22 @@ root.geometry("700x500")
 
 say = Label(text="Give me your link", fg="blue", font="20").pack()
 
+
 def gennerate():
-    # ดึงค่าจาก Entry มาใช้
     user_link = link.get()
-    name_file = name.get()
-    img = qrcode.make(user_link)  # สร้าง QR code จากลิ้งค์ที่ใส่
+    # สร้าง QR code จากลิ้งค์ที่ใส่
+    img = qrcode.make(user_link)
     
     # โหลดภาพและแสดงบน Label
-    img_open = Image.open(name_file)
-    img_tk = ImageTk.PhotoImage(img_open)
+    img_tk = ImageTk.PhotoImage(img)
     qr_label.config(image=img_tk)
     qr_label.image = img_tk
 
 def save():
-    img.save(name_file)  # บันทึกเป็นไฟล์ PNG
+    user_link = link.get()
+    name_file = name.get()
+    img = qrcode.make(user_link)  # สร้าง QR code จากลิ้งค์ที่ใส่
+    img.save(name_file)  # บันทึกเป็นไฟล์ที่มีชื่อจาก Entry
 
 link = StringVar()
 name = StringVar()
