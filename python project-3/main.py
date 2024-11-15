@@ -11,17 +11,20 @@ say = Label(text="Give me your link", fg="blue", font="20").pack()
 def gennerate():
     # ดึงค่าจาก Entry มาใช้
     user_link = link.get()
+    name_file = name.get()
     img = qrcode.make(user_link)  # สร้าง QR code จากลิ้งค์ที่ใส่
-    img.save("some_file.png")  # บันทึกเป็นไฟล์ PNG
+    img.save(name_file)  # บันทึกเป็นไฟล์ PNG
     
     # โหลดภาพและแสดงบน Label
-    img_open = Image.open("some_file.png")
+    img_open = Image.open(name_file)
     img_tk = ImageTk.PhotoImage(img_open)
     qr_label.config(image=img_tk)
     qr_label.image = img_tk
 
 link = StringVar()
+name = StringVar()
 Entry(root, textvariable=link).pack()
+Entry(root, textvariable=name).pack()
 
 savebtn = Button(root, text="Generate", fg="white", bg="green", command=gennerate)
 savebtn.pack()
@@ -31,5 +34,3 @@ qr_label = Label(root)
 qr_label.pack()
 
 root.mainloop()
-
-
