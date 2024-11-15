@@ -13,7 +13,6 @@ def gennerate():
     user_link = link.get()
     name_file = name.get()
     img = qrcode.make(user_link)  # สร้าง QR code จากลิ้งค์ที่ใส่
-    img.save(name_file)  # บันทึกเป็นไฟล์ PNG
     
     # โหลดภาพและแสดงบน Label
     img_open = Image.open(name_file)
@@ -21,13 +20,18 @@ def gennerate():
     qr_label.config(image=img_tk)
     qr_label.image = img_tk
 
+def save():
+    img.save(name_file)  # บันทึกเป็นไฟล์ PNG
+
 link = StringVar()
 name = StringVar()
 Entry(root, textvariable=link).pack()
 Entry(root, textvariable=name).pack()
 
-savebtn = Button(root, text="Generate", fg="white", bg="green", command=gennerate)
+genneratebtn = Button(root, text="Generate", fg="white", bg="green", command=gennerate)
+savebtn = Button(root, text="Save", fg="white", bg="black", command=save)
 savebtn.pack()
+genneratebtn.pack()
 
 # สร้าง Label สำหรับแสดง QR code
 qr_label = Label(root)
